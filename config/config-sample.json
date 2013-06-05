@@ -1,0 +1,18 @@
+{
+    "server" : "myserver",
+    "version" : "0.0.1",
+    "debug" : true,
+    "ports" : {
+        "rest" : 20002,
+        "socketIo" : 20000,
+        "socket" : 20001
+    },
+    "use" : {
+        "rest" : true,
+        "socket" : true,
+        "socketIo" : true,
+        "ssl" : false
+    },
+    "processExitOnError" : false,
+    "logFilePath" : "."
+}
