@@ -2,16 +2,7 @@
 node_modules/*
 !node_modules/unified.socket
 
-# Endpoints
+
 endpoints
-
-# Config
-config/*
-!config/config-sample.json
-
-# Application
+config
 application
-
-# node module src
-node_modules-src
-
