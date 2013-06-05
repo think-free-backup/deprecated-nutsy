@@ -1,13 +1,15 @@
 {
   "name": "nutsy",
-  "version" : "0.0.1"
+  "version" : "0.0.1",
   "description": "Node unified server",
   "author": "Christophe Meurice <meumeu1402@gmail.com>",
-  "dependencies": {
+  "dependencies" : {
     "cookies": ">= 0.3.6",
     "node-uuid": ">= 1.4.0",
     "restify": ">= 2.5.0",
     "socket.io": ">= 0.9.14"
   },
-  "engine": "node >= 0.8.8"
+  "engine": {
+    "node" : ">= 0.8.8"
+  }
 }
