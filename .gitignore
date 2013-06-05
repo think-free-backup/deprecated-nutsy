@@ -3,8 +3,7 @@ node_modules/*
 !node_modules/unified.socket
 
 # Endpoints
-endpoints/rest/*
-endpoints/socket/*
+endpoints
 
 # Config
 config/*
