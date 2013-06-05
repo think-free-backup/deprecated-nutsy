@@ -102,6 +102,7 @@ Client socket :
 Todo :
 ------
 
+- npm install -> run : application/install.sh
 - Load endpoints from application folder if exists, if not load from root (or from both ?)
 - Implement the possibility to defined customs api call from application (other than call)
 - Socket logout : use the socket ssid instead of the ssid sent 
