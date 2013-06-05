@@ -1,5 +1,6 @@
 {
   "name": "nutsy",
+  "version" : "0.0.1"
   "description": "Node unified server",
   "author": "Christophe Meurice <meumeu1402@gmail.com>",
   "dependencies": {
