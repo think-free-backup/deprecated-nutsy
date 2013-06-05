@@ -10,8 +10,7 @@ config/*
 !config/config-sample.json
 
 # Application
-application/*
-!application/main-sample.js
+application
 
 # node module src
 node_modules-src
