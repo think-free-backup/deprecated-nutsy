@@ -202,9 +202,11 @@ if (config.use.rest){
 
                     var c = new cookies( req, res, null );
                     c.set( "sessionId", ssid.session, {  httpOnly: true } );
+                    res.json({type :"ok", body : message});
                 }
-
-                res.json(message);
+                else{
+                    res.json({type :"error", body : message});
+                }
             });
         }
         else if (req.params.function == "checkSession"){
