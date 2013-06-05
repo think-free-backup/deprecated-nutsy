@@ -3,6 +3,6 @@ node_modules/*
 !node_modules/unified.socket
 
 
-endpoints
-config
-application
+/endpoints
+/config
+/application
