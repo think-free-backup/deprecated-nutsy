@@ -1,0 +1,19 @@
+# Node modules
+node_modules/*
+!node_modules/unified.socket
+
+# Endpoints
+endpoints/rest/*
+endpoints/socket/*
+
+# Config
+config/*
+!config/config-sample.json
+
+# Application
+application/*
+!application/main-sample.js
+
+# node module src
+node_modules-src
+
