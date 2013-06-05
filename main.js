@@ -23,6 +23,7 @@ var log = require('./lib/lib-log');
 var restify = undefined;
 var cookies = undefined; 
 var soc = undefined;
+var nodestatic = undefined;
 var application = require('./application/main');
 
 if (config.use.rest){
@@ -41,6 +42,11 @@ if (config.use.socket){
 
     if (!config.use.socketIo)
         config.ports.socketIo = 0;
+}
+
+if (config.use.static){
+
+    nodestatic = require('node-static');
 }
     
 var endpointsRest = [];
@@ -113,6 +119,7 @@ if (config.use.rest){
     var server = restify.createServer();
     server.name = config.server + " " + config.version;
     server.use(restify.queryParser({ mapParams: true }));
+    server.use(restify.bodyParser());
 
     // ### Api version
 
@@ -171,6 +178,17 @@ if (config.use.socket){
     // ### Connecting
 
     soc.connect(config.ports.socketIo,config.ports.socket);
+}
+
+if (config.use.static){
+
+    var fileServer = new(nodestatic.Server)('./static');
+
+    require('http').createServer(function (request, response) {
+        request.addListener('end', function () {
+            fileServer.serve(request, response);
+        });
+    }).listen(config.ports.static, "0.0.0.0");
 }
 
 // # We define here the main callback for each parts of the application

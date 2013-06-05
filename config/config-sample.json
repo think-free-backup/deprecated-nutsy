@@ -3,15 +3,17 @@
     "version" : "0.0.1",
     "debug" : true,
     "ports" : {
-        "rest" : 20002,
         "socketIo" : 20000,
-        "socket" : 20001
+        "socket" : 20001,
+        "rest" : 20002,
+        "static" : 20003
     },
     "use" : {
         "rest" : true,
         "socket" : true,
+        "ssl" : false,
         "socketIo" : true,
-        "ssl" : false
+        "page" : false
     },
     "processExitOnError" : false,
     "logFilePath" : "."
