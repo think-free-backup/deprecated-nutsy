@@ -14,7 +14,7 @@
 
 // # Application configuration
 
-var config = require('./lib/lib-config').load('config/config.json');
+var config = require('./lib/lib-config').load('/config/config.json');
 var api = "0.0.2";
 
 // # Loading modules
@@ -72,7 +72,7 @@ process.on('uncaughtException', function (err) {
 /* **************************************************************************************************************** */
 
 application.init(config);
-
+   
 
 // # Loading application endpoints
 /* *************************************************************************************************************** */
