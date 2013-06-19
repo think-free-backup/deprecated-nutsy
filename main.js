@@ -182,7 +182,7 @@ if (config.use.socket){
 
 if (config.use.static){
 
-    var fileServer = new(nodestatic.Server)('./static');
+    var fileServer = new(nodestatic.Server)('./endpoints/static');
 
     require('http').createServer(function (request, response) {
         request.addListener('end', function () {
