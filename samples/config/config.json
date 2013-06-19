@@ -9,11 +9,11 @@
         "static" : 20003
     },
     "use" : {
-        "rest" : true,
-        "socket" : true,
+        "socketIo" : false,
+        "socket" : false,
+        "rest" : false,
         "ssl" : false,
-        "socketIo" : true,
-        "page" : false
+        "static" : false
     },
     "processExitOnError" : false,
     "logFilePath" : "."
