@@ -339,6 +339,9 @@ if (config.use.socket){
                         var module = endpointsSocket[json.body.module];
                         if (module != undefined){
                             var fct = module[json.body.function];
+                            if (fct === undefined)
+                                fct = module[json.body.fct];
+
                             if (fct != undefined){
                                 fct(socket,json.body.param);
                                 return;
@@ -363,7 +366,11 @@ if (config.use.socket){
 
                 var params = json.body.param;
 
-                if (json.body.function == "tryLogin"){
+                var fct = module[json.body.function];
+                if (fct === undefined)
+                    fct = module[json.body.fct];
+
+                if (fct == "tryLogin"){
 
                     application.login(params[0],params[1],params[2],function(ssid, message){
 
@@ -377,7 +384,7 @@ if (config.use.socket){
                         socket.send(message);
                     });
                 }
-                else if (json.body.function == "tryValidateSession"){
+                else if (fct == "tryValidateSession"){
 
                     var ssid = params[0];
                     var answer = application.isSessionValid(ssid);
@@ -394,7 +401,7 @@ if (config.use.socket){
                         socket.send({type : "login-error", body : "Invalid session"});
                     }
                 }
-                else if (json.body.function == "tryLogout"){
+                else if (fct == "tryLogout"){
 
                     log.write("[login::tryLogout]", "User logout : " + params[0]);
 
