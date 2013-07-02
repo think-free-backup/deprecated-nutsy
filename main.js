@@ -366,9 +366,9 @@ if (config.use.socket){
 
                 var params = json.body.param;
 
-                var fct = module[json.body.function];
+                var fct = json.body.function;
                 if (fct === undefined)
-                    fct = module[json.body.fct];
+                    fct = json.body.fct;
 
                 if (fct == "tryLogin"){
 
