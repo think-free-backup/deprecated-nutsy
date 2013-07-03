@@ -1,0 +1,34 @@
+#!/bin/bash
+
+APP=on-domo
+NODE=/usr/local/bin/node
+
+test -x $NODE || exit 0
+
+mkdir /var/log/node 2> /dev/null
+mkdir /var/run/node 2> /dev/null
+
+function start_app {
+
+  cd /opt/$APP
+  NODE_ENV=production nohup "$NODE" "main.js" >>"/var/log/node/$APP.log" 2>&1 & echo $! > "/var/run/node/$APP.pid"
+}
+
+function stop_app {
+
+  sudo kill `cat /var/run/node/$APP.pid`
+}
+
+case $1 in
+   start)
+      start_app ;;
+    stop)
+      stop_app ;;
+    restart)
+      stop_app
+      start_app
+      ;;
+    *)
+      echo "usage: $APP {start|stop}" ;;
+esac
+exit 0
