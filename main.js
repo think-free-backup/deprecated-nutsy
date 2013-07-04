@@ -219,7 +219,7 @@ if (config.use.rest){
                 if (ssid !== undefined){
 
                     var c = new cookies( req, res, null );
-                    c.set( "sessionId", ssid.session, {  config.cookiesHttpOnly } );
+                    c.set( "sessionId", ssid.session, {  httpOnly : config.cookiesHttpOnly } );
                     res.json({type :"ok", body : message});
                 }
                 else{
@@ -419,6 +419,7 @@ if (config.use.socket){
             else{
 
                 log.write("Main", "Message with unknown type received");
+                log.write("Main", json)
                 socket.send({type : "error", tid : json.tid, status : "log", body : "Unknow call type received. Call : " + json.body.module + " - " + json.body.function + " - " + json.body.param + ". Software version : " + config.version});
             }    
         }
