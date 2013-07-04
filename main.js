@@ -219,7 +219,7 @@ if (config.use.rest){
                 if (ssid !== undefined){
 
                     var c = new cookies( req, res, null );
-                    c.set( "sessionId", ssid.session, {  httpOnly: true } );
+                    c.set( "sessionId", ssid.session, {  config.cookiesHttpOnly } );
                     res.json({type :"ok", body : message});
                 }
                 else{
