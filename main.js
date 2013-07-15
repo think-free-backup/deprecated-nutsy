@@ -157,16 +157,12 @@ if (config.use.socket){
 
     soc.setConnectionCallback(function(socket){
 
-        log.write("Main::connectionCallback", "Client connected : " + socket.host() + ":" + socket.port());
-
         application.clientConnected(socket);
     });
 
     // ### Disconnect callback
 
     soc.setDisconnectCallback(function(socket){
-
-        log.write("Main::disconnectCallback", "Client discconnected : " + socket.host() + ":" + socket.port());
 
         application.clientDisconnected(socket);
     });
@@ -419,7 +415,7 @@ if (config.use.socket){
             else{
 
                 log.write("Main", "Message with unknown type received");
-                log.write("Main", json)
+
                 socket.send({type : "error", tid : json.tid, status : "log", body : "Unknow call type received. Call : " + json.body.module + " - " + json.body.function + " - " + json.body.param + ". Software version : " + config.version});
             }    
         }
