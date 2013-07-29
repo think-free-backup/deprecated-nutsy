@@ -180,11 +180,27 @@ if (config.use.static){
 
     var fileServer = new(nodestatic.Server)('./endpoints/static');
 
-    require('http').createServer(function (request, response) {
+    /*require('http').createServer(function (request, response) {
         request.addListener('end', function () {
             fileServer.serve(request, response);
         });
+    }).listen(config.ports.static, "0.0.0.0");*/
+
+    require('http').createServer(function (request, response) {
+        request.addListener('end', function () {
+            fileServer.serve(request, response, function (err, result) {
+                if (err) { // There was an error serving the file
+                    console.log("Error serving " + request.url + " - " + err.message);
+
+                    // Respond to the client
+                    response.writeHead(err.status, err.headers);
+                    response.end();
+                }
+            });
+        }).resume();
     }).listen(config.ports.static, "0.0.0.0");
+
+    log.write("Main", "File server loaded")
 }
 
 // # We define here the main callback for each parts of the application
