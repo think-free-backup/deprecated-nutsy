@@ -12,6 +12,10 @@
  *
  ************************************************************ */
 
+// # Setting current working directory
+
+process.chdir(__dirname);
+
 // # Application configuration
 
 var config = require('./lib/lib-config').load('/config/config.json');
