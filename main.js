@@ -132,6 +132,7 @@ if (config.use.rest){
     // ### Login
 
     server.get('/session/:function', session);
+    server.post('/session/:function', session);
     
     if (config.debug)
         server.get('/debug/:function', debug);
@@ -139,6 +140,7 @@ if (config.use.rest){
     // ### Application parts
 
     server.get('/call/:part/:function', applicationEndpointsRestRespond);
+    server.post('/call/:part/:function', applicationEndpointsRestRespond);
 
     // ### Starting server
 
