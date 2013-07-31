@@ -262,10 +262,11 @@ if (config.use.rest){
         }
         else if (req.params.function == "logout"){
 
-            application.logout(params[0]);
-
             var c = new cookies( req, res, null );
             var ssid = c.get("sessionId");
+
+            application.logout(ssid);
+
             c.set( "sessionId", "logout", {  httpOnly: true } );
 
             res.json({type : "ok", body : "Session should be removed"});
