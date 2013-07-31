@@ -12,6 +12,10 @@
  *
  ************************************************************ */
 
+// # Setting current working directory
+
+process.chdir(__dirname);
+
 // # Application configuration
 
 var config = require('./lib/lib-config').load('/config/config.json');
@@ -128,6 +132,7 @@ if (config.use.rest){
     // ### Login
 
     server.get('/session/:function', session);
+    server.post('/session/:function', session);
     
     if (config.debug)
         server.get('/debug/:function', debug);
@@ -135,6 +140,7 @@ if (config.use.rest){
     // ### Application parts
 
     server.get('/call/:part/:function', applicationEndpointsRestRespond);
+    server.post('/call/:part/:function', applicationEndpointsRestRespond);
 
     // ### Starting server
 
@@ -157,16 +163,12 @@ if (config.use.socket){
 
     soc.setConnectionCallback(function(socket){
 
-        log.write("Main::connectionCallback", "Client connected : " + socket.host() + ":" + socket.port());
-
         application.clientConnected(socket);
     });
 
     // ### Disconnect callback
 
     soc.setDisconnectCallback(function(socket){
-
-        log.write("Main::disconnectCallback", "Client discconnected : " + socket.host() + ":" + socket.port());
 
         application.clientDisconnected(socket);
     });
@@ -184,11 +186,27 @@ if (config.use.static){
 
     var fileServer = new(nodestatic.Server)('./endpoints/static');
 
-    require('http').createServer(function (request, response) {
+    /*require('http').createServer(function (request, response) {
         request.addListener('end', function () {
             fileServer.serve(request, response);
         });
+    }).listen(config.ports.static, "0.0.0.0");*/
+
+    require('http').createServer(function (request, response) {
+        request.addListener('end', function () {
+            fileServer.serve(request, response, function (err, result) {
+                if (err) { // There was an error serving the file
+                    console.log("Error serving " + request.url + " - " + err.message);
+
+                    // Respond to the client
+                    response.writeHead(err.status, err.headers);
+                    response.end();
+                }
+            });
+        }).resume();
     }).listen(config.ports.static, "0.0.0.0");
+
+    log.write("Main", "File server loaded")
 }
 
 // # We define here the main callback for each parts of the application
@@ -219,7 +237,7 @@ if (config.use.rest){
                 if (ssid !== undefined){
 
                     var c = new cookies( req, res, null );
-                    c.set( "sessionId", ssid.session, {  httpOnly: true } );
+                    c.set( "sessionId", ssid.session, {  httpOnly : config.cookiesHttpOnly } );
                     res.json({type :"ok", body : message});
                 }
                 else{
@@ -419,6 +437,7 @@ if (config.use.socket){
             else{
 
                 log.write("Main", "Message with unknown type received");
+
                 socket.send({type : "error", tid : json.tid, status : "log", body : "Unknow call type received. Call : " + json.body.module + " - " + json.body.function + " - " + json.body.param + ". Software version : " + config.version});
             }    
         }
