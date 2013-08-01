@@ -221,7 +221,7 @@ if (config.use.rest){
 
     function version(req, res, next){
 
-        res.charSet = 'utf-8';
+        res.charSet('utf-8');
 
         res.json({server : config.server, version : config.version, api : api});
     }
@@ -230,7 +230,7 @@ if (config.use.rest){
 
     function session(req, res, next){
 
-        res.charSet = 'utf-8';
+        res.charSet('utf-8');
 
         if (req.params.function == "login"){
 
@@ -283,7 +283,7 @@ if (config.use.rest){
 
     function debug(req,res,next) {
 
-        res.charSet = 'utf-8';
+        res.charSet('utf-8');
 
         var module = endpointsRest["debug"];
             
@@ -304,7 +304,7 @@ if (config.use.rest){
 
     function applicationEndpointsRestRespond(req, res, next) {
 
-        res.charSet = 'utf-8';
+        res.charSet('utf-8');
 
         var c = new cookies( req, res, null );
 
