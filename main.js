@@ -221,6 +221,8 @@ if (config.use.rest){
 
     function version(req, res, next){
 
+        res.charSet = 'utf-8';
+
         res.json({server : config.server, version : config.version, api : api});
     }
 
@@ -281,6 +283,8 @@ if (config.use.rest){
 
     function debug(req,res,next) {
 
+        res.charSet = 'utf-8';
+
         var module = endpointsRest["debug"];
             
         if (module != undefined){
@@ -299,6 +303,8 @@ if (config.use.rest){
     // ### Send the response to rest request depending of the endpoint
 
     function applicationEndpointsRestRespond(req, res, next) {
+
+        res.charSet = 'utf-8';
 
         var c = new cookies( req, res, null );
 
