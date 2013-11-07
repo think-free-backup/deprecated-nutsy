@@ -158,7 +158,7 @@ if (config.use.rest){
 
     server.listen(config.ports.rest, function() {
 
-            log.write("Main",server.name + ' listening at ' + server.url);
+            log.write("Main","Rest server " + server.name + ' listening at ' + server.url);
     });
 }
 
