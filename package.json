@@ -5,10 +5,10 @@
   "author": "Christophe Meurice <meumeu1402@gmail.com>",
   "dependencies" : {
     "cookies": ">= 0.3.6",
+    "node-static" : ">= 0.6.9",
     "node-uuid": ">= 1.4.0",
     "restify": ">= 2.5.0",
-    "socket.io": ">= 0.9.14",
-    "node-static" : ">= 0.6.9"
+    "socket.io": ">= 0.9.14"    
   },
   "engine": {
     "node" : ">= 0.8.8"
