@@ -29,6 +29,7 @@ var cookies = undefined;
 var soc = undefined;
 var nodestatic = undefined;
 var application = require('./application/main');
+var fs = require("fs");
 
 if (config.use.rest){
 
@@ -57,6 +58,17 @@ var endpointsRest = [];
 var endpointsSocket = [];
 
 log.init(config.logFilePath + "/" +  config.server + ".log");
+
+// # Checking endpoints folder
+
+var endpointsPath = ".";
+
+if (fs.existsSync("./application/endpoints")) { 
+    
+    endpointsPath = "./application";
+}
+
+log.write("[Main]", "Loading endpoints from : " + endpointsPath);
 
 
 // # Exception handling
@@ -89,9 +101,9 @@ if (config.use.rest){
 
     log.write("Main", "Loading rest endpoints");
 
-    require("fs").readdirSync("./endpoints/rest").forEach(function(file) {
+    fs.readdirSync( endpointsPath + "/endpoints/rest").forEach(function(file) {
         var name = file.split(".js")[0];
-        endpointsRest[name] = require("./endpoints/rest/" + file);
+        endpointsRest[name] = require(endpointsPath + "/endpoints/rest/" + file);
         log.write("Main", "Loading application module for rest api : " + name);
     });
 }
@@ -102,9 +114,9 @@ if (config.use.socket){
 
     log.write("Main", "Loading socket endpoints");
 
-    require("fs").readdirSync("./endpoints/socket").forEach(function(file) {
+    fs.readdirSync(endpointsPath + "/endpoints/socket").forEach(function(file) {
         var name = file.split(".js")[0];
-        endpointsSocket[name] = require("./endpoints/socket/" + file);
+        endpointsSocket[name] = require(endpointsPath + "/endpoints/socket/" + file);
         log.write("Main", "Loading application module for socket api : " + name);
     });
 }
@@ -184,13 +196,7 @@ if (config.use.socket){
 
 if (config.use.static){
 
-    var fileServer = new(nodestatic.Server)('./endpoints/static');
-
-    /*require('http').createServer(function (request, response) {
-        request.addListener('end', function () {
-            fileServer.serve(request, response);
-        });
-    }).listen(config.ports.static, "0.0.0.0");*/
+    var fileServer = new(nodestatic.Server)(endpointsPath + "/endpoints/static");
 
     require('http').createServer(function (request, response) {
         request.addListener('end', function () {

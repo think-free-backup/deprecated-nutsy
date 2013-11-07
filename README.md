@@ -6,9 +6,9 @@ Node unified server.
 Installation :
 --------------
 
-run : npm install > Will install base dependencies
-create or clone your application to the folder application
-create or clone your endpoints for rest and socket in the folder endpoints
+- run : npm install > Will install base dependencies
+- create or clone your application to the folder application
+- (optional - depend of application) create or clone your endpoints for rest and socket in the folder endpoints
 
 Communication :
 ---------------
@@ -103,6 +103,5 @@ Todo :
 ------
 
 - npm install -> run : application/install.sh
-- Load endpoints from application folder if exists, if not load from root (or from both ?)
 - Implement the possibility to defined customs api call from application (other than call)
 - Socket logout : use the socket ssid instead of the ssid sent 
