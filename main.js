@@ -146,8 +146,10 @@ if (config.use.rest){
     server.get('/session/:function', session);
     server.post('/session/:function', session);
     
-    if (config.debug)
+    if (config.debug){
         server.get('/debug/:function', debug);
+        server.post('/debug/:function', debug);
+    }
 
     // ### Application parts
 
