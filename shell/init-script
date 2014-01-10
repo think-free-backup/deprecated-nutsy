@@ -1,8 +1,8 @@
 #!/bin/bash
 
-export APP=on-domo
+export APP=MYAPP
 export NODE=/usr/local/bin/node
-export BASEPATH=/opt
+export BASEPATH=/srv
 
 test -x $NODE || exit 0
 
