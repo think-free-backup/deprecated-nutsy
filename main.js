@@ -156,6 +156,16 @@ if (config.use.rest){
     server.get('/call/:part/:function', applicationEndpointsRestRespond);
     server.post('/call/:part/:function', applicationEndpointsRestRespond);
 
+
+    // ### Static
+
+    if (config.use.restifystatic){
+        server.get(/\/static\/.*/, restify.serveStatic({
+            'directory': endpointsPath + "/endpoints",
+	    'default': 'index.html'
+        }));
+    }
+
     // ### Starting server
 
     server.listen(config.ports.rest, function() {
