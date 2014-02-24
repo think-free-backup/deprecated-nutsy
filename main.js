@@ -162,7 +162,7 @@ if (config.use.rest){
     if (config.use.restifystatic){
         server.get(/\/static\/.*/, restify.serveStatic({
             'directory': endpointsPath + "/endpoints",
-	    'default': 'index.html'
+            'default': 'index.html'
         }));
     }
 

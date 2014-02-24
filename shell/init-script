@@ -15,6 +15,7 @@ function start_app {
 
   cd $BASEPATH/$APP
   NODE_ENV=production nohup $NODE main.js >> /var/log/node/$APP.log 2>&1 & echo $! > /var/run/node/$APP.pid
+  #NODE_ENV=production nohup "$NODE" "main.js" >>"/var/log/node/$APP.log" 2>&1 & echo $! > "/var/run/node/$APP.pid"
 }
 
 export -f start_app
